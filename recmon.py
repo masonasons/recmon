@@ -151,10 +151,6 @@ def announceUptime():
 	speak(uptime)
 def speak(text):
 	print(text)
-#We use espeak on Linux and other OS's.
-#	if platform.system()!="Windows":
-#		cmd("espeak -s 350 "+text)
-#	else:
 	speaker = outputs.auto.Auto()
 	speaker.speak(text)
 	if is_espeak==True:
@@ -173,14 +169,5 @@ def main():
 		announceUptime()
 	if number==5:
 		announceNetworkInfo()
-
-def cmd(command):
-	output=subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	result=(output.stdout.read()+output.stderr.read()).strip()
-	if result.endswith(b"operable program or batch file."):
-		return ""
-	elif result.endswith(b"command not found"):
-		return ""
-	return result
 
 main()
