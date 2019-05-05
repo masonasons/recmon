@@ -17,7 +17,10 @@ import sys
 import os
 import platform
 #if platform.system()=="Windows":
-from accessible_output2 import outputs
+try:
+	from accessible_output2 import outputs
+except:
+	pass
 import psutil
 # Styles of size calculation/string composition, do not change!
 # Treditional style, Y, K, M, G, B, ...
@@ -151,11 +154,14 @@ def announceUptime():
 	speak(uptime)
 def speak(text):
 	print(text)
-	speaker = outputs.auto.Auto()
-	speaker.speak(text)
-	if is_espeak==True:
-		while espeak.core.is_playing()==True:
-			time.sleep(0.005)
+	try:
+		speaker = outputs.auto.Auto()
+		speaker.speak(text)
+		if is_espeak==True:
+			while espeak.core.is_playing()==True:
+				time.sleep(0.005)
+	except:
+		pass
 
 def main():
 	number=int(sys.argv[1])
